@@ -1,0 +1,19 @@
+{
+  "name": "sgi-proyectoformativo",
+  "version": "1.0.0",
+  "description": "Sistema de gestion de inventarios SENA",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/4ngelLugo/SGI-ProyectoFormativo.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/4ngelLugo/SGI-ProyectoFormativo/issues"
+  },
+  "homepage": "https://github.com/4ngelLugo/SGI-ProyectoFormativo#readme"
+}
