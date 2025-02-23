@@ -27,8 +27,6 @@ function bringToTop(window) {
     });
 
     //IF zindex is 1 maintain all z-index windows
-   
-   
     // if (currentZIndex === 1) {
     //     zIndexWindows.forEach(zIndexWindow => {
     //         let zIndexWindowElement = document.getElementById(zIndexWindow.id);
@@ -37,8 +35,6 @@ function bringToTop(window) {
     // }
 
     windowElement.dataset.zIndex = currentZIndex + 1;
-    
-
 }
 
 function pressedWindow(window) {
