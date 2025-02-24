@@ -14,9 +14,13 @@
 }
 
 * {
-  margin    : 0;
-  padding   : 0;
-  box-sizing: border-box;
+  margin             : 0;
+  padding            : 0;
+  box-sizing         : border-box;
+  user-select        : none;
+  -webkit-user-select: none;
+  -moz-user-select   : none;
+  -ms-user-select    : none;
 }
 
 a {
@@ -52,12 +56,19 @@ button {
 }
 
 button:hover {
-  border-color: #646cff;
+  border-color: #646464;
 }
 
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
+}
+
+li {
+  list-style-type: none;
+  display        : flex;
+  align-items    : center;
+  gap            : .5em;
 }
 
 @media (prefers-color-scheme: light) {
