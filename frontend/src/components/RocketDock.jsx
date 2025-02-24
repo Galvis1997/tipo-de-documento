@@ -1,29 +1,33 @@
 const images = import.meta.glob('../assets/images/rocketDockIcons/*.{png,jpg,jpeg,svg,webp}', { eager: true })
 
 const imageList = Object.entries(images)
-  .map(([path, img]) => ({ path, src: img.default }))
+  .map(([path, img]) => {
+    const fileName = path.split('/').pop().replace(/\.\w+$/, '')
+    return { name: fileName, src: img.default }
+  })
   .sort((a, b) => {
     const order = [
-      'finder.png', 'appstore.png', 'settings.webp', 'calculator.png', 'launchpad.png', 'mail.png', 'maps.png', 'message.png', 'music.png', 'notes.png', 'photos.png', 'terminal.png', 'vscode.svg', 'bin.png'
-    ]
+      'finder', 'appstore', 'settings', 'calculator',
+      'launchpad', 'mail', 'maps', 'message', 'music',
+      'notes', 'photos', 'terminal', 'vscode', 'bin'
+    ];
 
-    return order.indexOf(a.path.split('/').pop()) - order.indexOf(b.path.split('/').pop())
-  })
-  .map(item => item.src)
+    return order.indexOf(a.name) - order.indexOf(b.name)
+  });
 
-export default function RocketDock () {
+export default function RocketDock({ onIconClick }) {
   return (
     <section className='rocketDock'>
-      {imageList.map((icon, index) => (
-        <RocketDockItem key={index} icon={icon} />
+      {imageList.map(({ name, src }, index) => (
+        <RocketDockItem key={index} icon={src} onClick={() => onIconClick(name)} />
       ))}
     </section>
   )
 }
 
-function RocketDockItem ({ icon }) {
+function RocketDockItem({ icon, onClick }) {
   return (
-    <div className='rocketDock--item'>
+    <div className='rocketDock--item' onClick={onClick}>
       <img src={icon} alt='Dock Icon' />
     </div>
   )

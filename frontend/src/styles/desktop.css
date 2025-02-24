@@ -69,8 +69,10 @@
 }
 
 .rocketDock--item {
-  width     : 3.125rem;
-  height    : 3.125rem;
+  width : 3.125rem;
+  height: 3.125rem;
+
+  cursor    : pointer;
   transition: transform 0.2s ease-in-out;
 }
 
