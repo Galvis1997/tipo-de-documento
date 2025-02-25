@@ -10,12 +10,12 @@ const imageList = Object.entries(images)
       'finder', 'appstore', 'settings', 'calculator',
       'launchpad', 'mail', 'maps', 'message', 'music',
       'notes', 'photos', 'terminal', 'vscode', 'bin'
-    ];
+    ]
 
     return order.indexOf(a.name) - order.indexOf(b.name)
-  });
+  })
 
-export default function RocketDock({ onIconClick }) {
+export default function RocketDock ({ onIconClick }) {
   return (
     <section className='rocketDock'>
       {imageList.map(({ name, src }, index) => (
@@ -25,7 +25,7 @@ export default function RocketDock({ onIconClick }) {
   )
 }
 
-function RocketDockItem({ icon, onClick }) {
+function RocketDockItem ({ icon, onClick }) {
   return (
     <div className='rocketDock--item' onClick={onClick}>
       <img src={icon} alt='Dock Icon' />

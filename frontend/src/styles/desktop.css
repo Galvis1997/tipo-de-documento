@@ -66,6 +66,8 @@
   backdrop-filter : blur(10px);
   border-radius   : 1rem;
   box-shadow      : 0 0 10px rgba(37, 37, 37, 0.3);
+
+  z-index: 100;
 }
 
 .rocketDock--item {
