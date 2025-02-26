@@ -53,19 +53,21 @@ export default function Desktop () {
   return (
     <main className='mainScreen'>
       <Navbar />
-      {openWindows.map((window) => (
-        <AppWindow
-          key={window.id}
-          id={window.id}
-          title={window.id}
-          onWindowClick={onWindowClick}
-          isTop={isTop}
-          onWindowClose={onWindowClose}
-          onWindowToggle={() => onWindowToggle(window.id)}
-          isToggled={window.isToggled}
-        />
-      ))}
-      <RocketDock onIconClick={onIconClick} />
+      <div className='screen'>
+        {openWindows.map((window) => (
+          <AppWindow
+            key={window.id}
+            id={window.id}
+            title={window.id}
+            onWindowClick={onWindowClick}
+            isTop={isTop}
+            onWindowClose={onWindowClose}
+            onWindowToggle={() => onWindowToggle(window.id)}
+            isToggled={window.isToggled}
+          />
+        ))}
+        <RocketDock onIconClick={onIconClick} />
+      </div>
     </main>
   )
 }

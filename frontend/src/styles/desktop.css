@@ -49,6 +49,12 @@
   background-color: #2f2f2f;
 }
 
+.screen {
+  flex-grow: 1;
+
+  position: relative;
+}
+
 .rocketDock {
   width  : fit-content;
   padding: .8em 1.3em;
