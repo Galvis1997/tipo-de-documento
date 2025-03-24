@@ -6,7 +6,7 @@ import AppWindow from '../components/AppWindow'
 
 export default function Desktop () {
   const [openWindows, setOpenWindows] = useState([])
-  const [isTop, setIsTop] = useState(null)
+  const [isTop, setIsTop] = useState()
 
   // Abre una ventana al hacer click en un icono y la lleva al frente
   const onIconClick = (name) => {
@@ -46,9 +46,9 @@ export default function Desktop () {
     )
   }
 
-  useEffect(() => {
-    console.log(openWindows)
-  }, [openWindows])
+  // useEffect(() => {
+  //   console.log(openWindows)
+  // }, [openWindows])
 
   return (
     <main className='mainScreen'>
