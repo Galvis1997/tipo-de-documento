@@ -1,10 +1,9 @@
-import { useEffect } from "react"
+import { useEffect } from 'react'
 
-export const useWindowDraggable = (winRef, dragRef, tobBarHeight, setWindowPosition) => {
+export const useWindowDraggable = (winRef, dragRef, screen, tobBarHeight, setWindowPosition) => {
   useEffect(() => {
     const draggableRef = dragRef.current
     const windowRef = winRef.current
-    const screen = document.querySelector('.screen')
 
     if (!draggableRef || !windowRef || !screen) return
 
@@ -57,5 +56,4 @@ export const useWindowDraggable = (winRef, dragRef, tobBarHeight, setWindowPosit
       document.removeEventListener('mouseup', mouseUp)
     }
   }, [])
-
 }

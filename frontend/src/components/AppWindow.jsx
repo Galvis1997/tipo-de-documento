@@ -3,10 +3,11 @@ import { useWindowDraggable } from '../hooks/useWindowDraggable'
 import { useWindowZIndex } from '../hooks/useWindowZIndex'
 import { useWindowVisibility } from '../hooks/useWindowVisibility'
 import { useWindowMaximize } from '../hooks/useWindowMaximize'
+import { useWindowResizable } from '../hooks/useWindowResizable'
 
 import '../styles/window.css'
 
-export default function AppWindow({
+export default function AppWindow ({
   id,
   title,
   isTop,
@@ -17,20 +18,25 @@ export default function AppWindow({
 }) {
   const winRef = useRef(null)
   const dragRef = useRef(null)
+  const screen = document.querySelector('.screen')
+
   const [windowPosition, setWindowPosition] = useState({ x: '50%', y: '50%' })
-  const tobBarHeight = 35.2
+  const [windowSize, setWindowSize] = useState({ width: 700, height: 400 })
+  const topBarHeight = 35.2
 
   // Maximiza o restaura la ventana
-  const { isMaximized, toggleMaximize } = useWindowMaximize(winRef, dragRef, windowPosition)
+  const { isMaximized, toggleMaximize } = useWindowMaximize(winRef, dragRef, windowPosition, windowSize)
 
   // Configurar la ventana para arrastrar
-  useWindowDraggable(winRef, dragRef, tobBarHeight, setWindowPosition)
+  useWindowDraggable(winRef, dragRef, screen, topBarHeight, setWindowPosition)
 
   // Manejador de zIndex
   useWindowZIndex(winRef, isMaximized, isTop, id)
 
   // Minimiza la ventane o restaura
   useWindowVisibility(winRef, isToggled)
+
+  useWindowResizable(winRef, screen, isMaximized, setWindowSize, setWindowPosition, topBarHeight)
 
   return (
     <section ref={winRef} className='window' id={id} onClick={() => onWindowClick(id)}>

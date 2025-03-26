@@ -2,10 +2,9 @@
   width : 700px;
   height: 400px;
 
-  position : absolute;
-  top      : 50%;
-  left     : 50%;
-  transform: translate(-50%, -50%);
+  position: absolute;
+  top     : calc(50vh - 200px);
+  left    : calc(50vw - 350px);
 
   display: flex;
 
@@ -100,4 +99,45 @@
   gap            : .4em;
 
   border-bottom: 1px solid #e7e7e7;
+}
+
+.resizer {
+  position  : absolute;
+  z-index   : 210;
+}
+
+.resizer:hover {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.resizer--top,
+.resizer--bottom {
+  width : 100%;
+  height: 5px;
+  left  : 0;
+  cursor: ns-resize;
+}
+
+.resizer--left,
+.resizer--right {
+  height: 100%;
+  width : 5px;
+  top   : 0;
+  cursor: ew-resize;
+}
+
+.resizer--top {
+  top: -2px;
+}
+
+.resizer--bottom {
+  bottom: -2px;
+}
+
+.resizer--left {
+  left: -2px;
+}
+
+.resizer--right {
+  right: -2px;
 }
