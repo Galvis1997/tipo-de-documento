@@ -1,17 +1,16 @@
 import { useRef, useState } from "react"
+import { SaveElementsEndpoint } from "../../config/apiRoutes"
 
-export default function CreateElementsForm({ setAlert }) {
+export default function CreateElements({ setAlert }) {
   const formRef = useRef(null)
   const [tipo, setTipo] = useState('devolutivo')
-
-  const controllerAPI = 'http://localhost/sgi-proyectoformativo/backend/elementos/logic/saveLogic.php'
-
+  
   const handleSubmit = (e) => {
     e.preventDefault()
 
     const formData = new FormData(formRef.current)
 
-    fetch(controllerAPI, {
+    fetch(SaveElementsEndpoint, {
       method: 'POST',
       body: formData,
       credentials: 'include'
@@ -44,9 +43,9 @@ export default function CreateElementsForm({ setAlert }) {
         }
 
       })
-    .catch((error) => {
-      console.error(error)
-    })
+      .catch((error) => {
+        console.error(error)
+      })
   }
 
   return (

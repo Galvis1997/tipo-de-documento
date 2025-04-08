@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useWindowDraggable } from '../hooks/useWindowDraggable'
 import { useWindowZIndex } from '../hooks/useWindowZIndex'
 import { useWindowVisibility } from '../hooks/useWindowVisibility'
@@ -6,9 +6,9 @@ import { useWindowMaximize } from '../hooks/useWindowMaximize'
 import { useWindowResizable } from '../hooks/useWindowResizable'
 
 import '../styles/window.css'
-import CreateElementsForm from './CreateElementsForm'
+import { windowContents } from '../data/windowContents'
 
-export default function AppWindow ({
+export default function AppWindow({
   id,
   title,
   isTop,
@@ -18,12 +18,13 @@ export default function AppWindow ({
   isToggled,
   setAlert
 }) {
+  // #region Window Config
   const winRef = useRef(null)
   const dragRef = useRef(null)
   const screen = document.querySelector('.screen')
 
   const [windowPosition, setWindowPosition] = useState({ x: '50%', y: '50%' })
-  const [windowSize, setWindowSize] = useState({ width: 700, height: 400 })
+  const [windowSize, setWindowSize] = useState({ width: 900, height: 532 })
   const topBarHeight = 35.2
 
   // Maximiza o restaura la ventana
@@ -39,6 +40,42 @@ export default function AppWindow ({
   useWindowVisibility(winRef, isToggled)
 
   useWindowResizable(winRef, screen, isMaximized, setWindowSize, setWindowPosition, topBarHeight)
+  // #endregion
+
+  // #region Window Content
+  const [activeView, setActiveView] = useState()
+
+  const content = windowContents[id]
+
+  useEffect(() => {
+    if (content?.sidebar?.length > 0) {
+      setActiveView(content.sidebar[0].key)
+    }
+
+  }, [id])
+
+  const renderSidebarContent = () => {
+    if (!content?.sidebar) return
+
+    return (
+      <ul className='window__menu'>
+        {content.sidebar?.map(item => (
+          <li key={item.key} onClick={() => setActiveView(item.key)} className={`window__menu--item ${activeView === item.key ? 'window__menu--item--active' : ''}`}>
+            <i className={item.icon} />
+            <span>{item.label}</span>
+          </li>
+        ))}
+      </ul>
+    )
+  }
+
+  const renderMainContent = () => {
+    if (!content?.views) return
+
+    const ViewComponent = content.views?.[activeView]
+    return ViewComponent ? ViewComponent({ setAlert }) : ''
+  }
+  // #endregion
 
   return (
     <section ref={winRef} className='window' id={id} onClick={() => onWindowClick(id)}>
@@ -51,16 +88,7 @@ export default function AppWindow ({
       </header>
 
       <aside className='window__sidebar'>
-        <ul className='window__menu'>
-          <li>
-            <i className='fas fa-desktop' />
-            <span>Pantalla</span>
-          </li>
-          <li>
-            <i className='fas fa-video' />
-            <span>Animaciones</span>
-          </li>
-        </ul>
+        {renderSidebarContent()}
       </aside>
 
       <main className='window__main'>
@@ -68,7 +96,7 @@ export default function AppWindow ({
           <span>{title}</span>
         </header>
         <article className='window-main__article'>
-          {id === 'finder' && (<CreateElementsForm setAlert={setAlert} />)}
+          {renderMainContent()}
         </article>
       </main>
     </section>
