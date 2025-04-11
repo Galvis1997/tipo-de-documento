@@ -49,6 +49,8 @@ export default function Desktop() {
     )
   }
 
+  const windowIds = openWindows.map((window) => window.id)
+
   return (
     <main className='mainScreen'>
       <Navbar />
@@ -66,7 +68,7 @@ export default function Desktop() {
             setAlert={setAlert}
           />
         ))}
-        <RocketDock onIconClick={onIconClick} />
+        <RocketDock onIconClick={onIconClick} openWindows={windowIds} />
         <Alert
           alertRef={alertRef}
           type={alert.type}

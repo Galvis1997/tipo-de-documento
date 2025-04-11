@@ -15,20 +15,28 @@ const imageList = Object.entries(images)
     return order.indexOf(a.name) - order.indexOf(b.name)
   })
 
-export default function RocketDock ({ onIconClick }) {
+export default function RocketDock({ onIconClick, openWindows }) {
   return (
     <section className='rocketDock'>
-      {imageList.map(({ name, src }, index) => (
-        <RocketDockItem key={index} icon={src} onClick={() => onIconClick(name)} />
-      ))}
+      {imageList.map(({ name, src }, index) => {
+        return (
+          <RocketDockItem
+            key={index}
+            icon={src}
+            onClick={() => onIconClick(name)}
+            open={openWindows.includes(name)}
+          />)
+      })}
     </section>
   )
 }
 
-function RocketDockItem ({ icon, onClick }) {
+function RocketDockItem({ icon, onClick, open }) {
   return (
-    <div className='rocketDock--item' onClick={onClick}>
-      <img src={icon} alt='Dock Icon' />
+    <div className={`rocketDock--item ${open ? 'rocketDock--item__open' : ''}`} onClick={onClick}>
+      <img src={icon} alt="Dock Icon" className="rocketDock--item__icon" />
+      {open && <div className="rocketDock--item__indicator" />}
     </div>
   )
 }
+
