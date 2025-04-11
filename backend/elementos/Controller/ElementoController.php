@@ -41,6 +41,15 @@ class ElementoController
     return ["error" => "error al guardar"];
   }
 
+  public function getAllElementos()
+  {
+    $get_elementos = $this->elemento_model->getAllElementos();
+
+    if ($get_elementos) return $get_elementos;
+
+    return ["error" => "error al obtener elementos"];
+  }
+
   public function getElementoByCodigo($codigo, $tabla_tipo)
   {
     $get_elemento = $this->elemento_model->getElementoByCodigo($codigo, $tabla_tipo);

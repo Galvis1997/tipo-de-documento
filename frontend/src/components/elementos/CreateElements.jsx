@@ -35,16 +35,16 @@ export default function CreateElements({ setAlert }) {
               setAlert({ type: 'error', message: 'Ya existe un elemento con el mismo codigo', active: true })
               break
             case 'error al guardar':
-              setAlert({ type: 'error', message: 'Error al guardar el elemento', active: true })
+              setAlert({ type: 'error', message: 'Ocurrio un error al guardar el elemento', active: true })
               break
           }
         } else if (response.success) {
           setAlert({ type: 'success', message: 'Elemento guardado correctamente', active: true })
         }
-
       })
       .catch((error) => {
         console.error(error)
+        setAlert({ type: 'error', message: 'Ocurrio un error al guardar el elemento', active: true })
       })
   }
 

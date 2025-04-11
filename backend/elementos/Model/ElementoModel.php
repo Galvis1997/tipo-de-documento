@@ -41,6 +41,27 @@ class ElementoModel
     return null;
   }
 
+  public function getAllElementos()
+  {
+    $query = "SELECT * FROM (
+              SELECT ele_dev_codigo AS codigo, ele_dev_nombre AS nombre, area_id AS area, 'devolutivo' AS tipo
+              FROM {$this->table_devo}
+              UNION
+              SELECT ele_con_codigo AS codigo, ele_con_nombre AS nombre, area_id AS area, 'consumible' AS tipo
+              FROM {$this->table_cons}
+              ) AS elementos
+              ORDER BY tipo DESC, codigo ASC";
+
+    $stmt = $this->conn->prepare($query);
+
+    if ($stmt->execute()) {
+      $result = $stmt->get_result();
+      return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    return null;
+  }
+
   public function getElementoByCodigo($codigo, $tabla_tipo)
   {
     $column = $tabla_tipo == "elementos_consumibles" ? "ele_con_codigo" : "ele_dev_codigo";

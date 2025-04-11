@@ -1,4 +1,5 @@
 import CreateElements from "../components/Elementos/CreateElements"
+import ListElements from "../components/elementos/ListElements"
 
 export const windowContents = {
   finder: {
@@ -8,7 +9,7 @@ export const windowContents = {
     ],
     views: {
       createElement: ({ setAlert }) => <CreateElements setAlert={setAlert} />,
-      listElement: () => <p>LIST</p>
+      listElement: ({ setAlert }) => <ListElements setAlert={setAlert} />
     }
   }
 }
