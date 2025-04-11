@@ -13,7 +13,9 @@ class ElementoModel
 
   public function saveElementoDevolutivo($codigo, $nombre, $area, $placa, $serial, $marca, $modelo)
   {
-    $query = "INSERT INTO " . $this->table_devo . " (ele_dev_codigo, ele_dev_nombre, ele_dev_placa, ele_dev_serial, area_id, marca_id, ele_dev_modelo) VALUES (?, ?, ?, ?, ?, ?, ?)";
+    $query = "INSERT INTO {$this->table_devo}
+              (ele_dev_codigo, ele_dev_nombre, ele_dev_placa, ele_dev_serial, area_id, marca_id, ele_dev_modelo)
+              VALUES (?, ?, ?, ?, ?, ?, ?)";
     $stmt = $this->conn->prepare($query);
     $stmt->bind_param("issiiis", $codigo, $nombre, $placa, $serial, $area, $marca, $modelo);
 
@@ -24,11 +26,13 @@ class ElementoModel
     return null;
   }
 
-  public function saveElementoConsumible($codigo, $nombre, $area, $cantidad)
+  public function saveElementoConsumible($codigo, $nombre, $area, $cantidad, $medida)
   {
-    $query = "INSERT INTO " . $this->table_cons . " (ele_con_codigo, ele_con_nombre, ele_con_cantidad, area_id) VALUES (?, ?, ?, ?)";
+    $query = "INSERT INTO {$this->table_cons}
+              (ele_con_codigo, ele_con_nombre, ele_con_cantidad, area_id)
+              VALUES (?, ?, ?, ?, ?)";
     $stmt = $this->conn->prepare($query);
-    $stmt->bind_param("isii", $codigo, $nombre, $cantidad, $area);
+    $stmt->bind_param("isii", $codigo, $nombre, $cantidad, $medida, $area);
 
     if ($stmt->execute()) return true;
 
@@ -41,7 +45,9 @@ class ElementoModel
   {
     $column = $tabla_tipo == "elementos_consumibles" ? "ele_con_codigo" : "ele_dev_codigo";
 
-    $query = "SELECT * FROM $tabla_tipo WHERE $column = ?";
+    $query = "SELECT *
+              FROM {$tabla_tipo}
+              WHERE $column = ?";
     $stmt = $this->conn->prepare($query);
     $stmt->bind_param('i', $codigo);
 

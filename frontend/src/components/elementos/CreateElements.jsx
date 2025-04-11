@@ -4,7 +4,7 @@ import { SaveElementsEndpoint } from "../../config/apiRoutes"
 export default function CreateElements({ setAlert }) {
   const formRef = useRef(null)
   const [tipo, setTipo] = useState('devolutivo')
-  
+
   const handleSubmit = (e) => {
     e.preventDefault()
 
@@ -84,7 +84,10 @@ export default function CreateElements({ setAlert }) {
             <input type='text' placeholder='Modelo' name='ele_modelo' id='ele_modelo' />
           </>
         ) : (
-          <input type='number' placeholder='Cantidad' name='ele_cant' id='ele_cant' />
+          <>
+            <input type='number' placeholder='Cantidad' name='ele_cant' id='ele_cant' />
+            <input type='text' placeholder='Unidad de medida' name='ele_medida' id='ele_medida' />
+          </>
         )}
         <button className="form__button" type="submit">Enviar</button>
       </form>

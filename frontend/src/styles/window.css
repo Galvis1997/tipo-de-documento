@@ -234,8 +234,7 @@
   outline-color: #4e94e07f;
 }
 
-#ele_area,
-#ele_cant {
+#ele_area {
   grid-column: 1/3;
 }
 
