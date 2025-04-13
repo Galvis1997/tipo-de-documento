@@ -5,6 +5,7 @@ import { useWindowVisibility } from '../hooks/useWindowVisibility'
 import { useWindowMaximize } from '../hooks/useWindowMaximize'
 import { useWindowResizable } from '../hooks/useWindowResizable'
 
+import { Icon } from '@iconify/react'
 import '../styles/window.css'
 import { windowContents } from '../data/windowContents'
 
@@ -61,7 +62,11 @@ export default function AppWindow({
       <ul className='window__menu'>
         {content.sidebar?.map(item => (
           <li key={item.key} onClick={() => setActiveView(item.key)} className={`window__menu--item ${activeView === item.key ? 'window__menu--item--active' : ''}`}>
-            <i className={item.icon} />
+            <Icon
+              icon={item.icon}
+              width='28px'
+              strokeWidth={1.2}
+              className='window__menu--item--icon'/>
             <span>{item.label}</span>
           </li>
         ))}

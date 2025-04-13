@@ -4,8 +4,8 @@ import ListElements from "../components/elementos/ListElements"
 export const windowContents = {
   finder: {
     sidebar: [
-      { key: 'createElement', icon: 'fas fa-folder', label: 'Crear Elemento' },
-      { key: 'listElement', icon: 'fas fa-cog', label: 'Listar Elemento' }
+      { key: 'createElement', icon: 'system-uicons:clipboard-add', label: 'Crear Elemento' },
+      { key: 'listElement', icon: 'system-uicons:clipboard-notes', label: 'Listar Elemento' }
     ],
     views: {
       createElement: ({ setAlert }) => <CreateElements setAlert={setAlert} />,
