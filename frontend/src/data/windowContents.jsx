@@ -4,12 +4,12 @@ import ListElements from "../components/elementos/ListElements"
 export const windowContents = {
   finder: {
     sidebar: [
-      { key: 'createElement', icon: 'system-uicons:clipboard-add', label: 'Crear Elemento' },
-      { key: 'listElement', icon: 'system-uicons:clipboard-notes', label: 'Listar Elemento' }
+      { key: 'listElement', icon: 'system-uicons:clipboard-notes', label: 'Listar elementos' },
+      { key: 'createElement', icon: 'system-uicons:clipboard-add', label: 'Crear elemento' },
     ],
     views: {
+      listElement: ({ setAlert }) => <ListElements setAlert={setAlert} />,
       createElement: ({ setAlert }) => <CreateElements setAlert={setAlert} />,
-      listElement: ({ setAlert }) => <ListElements setAlert={setAlert} />
     }
   }
 }

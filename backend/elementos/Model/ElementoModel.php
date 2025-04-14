@@ -44,11 +44,13 @@ class ElementoModel
   public function getAllElementos()
   {
     $query = "SELECT * FROM (
-              SELECT ele_dev_codigo AS codigo, ele_dev_nombre AS nombre, area_id AS area, 'devolutivo' AS tipo
-              FROM {$this->table_devo}
+              SELECT ele_dev_codigo AS codigo, ele_dev_nombre AS nombre, area_nombre AS area, 'devolutivo' AS tipo, ele_dev_estado AS estado
+              FROM {$this->table_devo} d
+              JOIN areas a ON d.area_id = a.area_id
               UNION
-              SELECT ele_con_codigo AS codigo, ele_con_nombre AS nombre, area_id AS area, 'consumible' AS tipo
-              FROM {$this->table_cons}
+              SELECT ele_con_codigo AS codigo, ele_con_nombre AS nombre, area_nombre AS area, 'consumible' AS tipo, ele_con_estado AS estado
+              FROM {$this->table_cons} c
+              JOIN areas a ON c.area_id = a.area_id
               ) AS elementos
               ORDER BY tipo DESC, codigo ASC";
 

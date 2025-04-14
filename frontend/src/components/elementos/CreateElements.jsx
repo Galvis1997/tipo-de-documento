@@ -50,7 +50,7 @@ export default function CreateElements({ setAlert }) {
 
   return (
     <>
-      <span className="form__title">Registrar Elemento</span>
+      <span className="title">Registrar Elemento</span>
       <form className='form' ref={formRef} onSubmit={handleSubmit}>
         <input type='number' placeholder='Codigo' name='ele_codigo' id='ele_codigo' />
         <input type='text' placeholder='Nombre' name='ele_nombre' id='ele_nombre' />
