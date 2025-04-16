@@ -58,4 +58,19 @@ class ElementoController
 
     return ["error" => "elemento no existe"];
   }
+
+  public function deactivateElemento($codigo, $tipo)
+  {
+    $tabla_tipo = strtolower($tipo) === 'consumible' ? $this->elemento_model->table_cons : $this->elemento_model->table_devo;
+
+    $get_elemento = $this->elemento_model->getElementoByCodigo($codigo, $tabla_tipo);
+
+    if (!$get_elemento) return ["error" => "elemento no existe"];
+
+    $deactivate_elemento = $this->elemento_model->deactivateElemento($codigo, $tabla_tipo);
+
+    if ($deactivate_elemento) return ["success" => "elemento desactivado"];
+
+    return ["error" => "error al deactivar el elemento"];
+  }
 }

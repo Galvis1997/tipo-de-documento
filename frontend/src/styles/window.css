@@ -33,8 +33,8 @@
 }
 
 .window__sidebar {
-  max-width  : 14.6rem;
-  min-width  : 6.11625rem;
+  max-width  : 14.4rem;
+  min-width  : 14.4rem;
   height     : 100%;
   padding-top: 2.725em;
 
@@ -374,8 +374,8 @@
 }
 
 .table__body--actions svg:hover {
-  transform: scale(1.1);
   color    : #007aff;
+  transform: scale(1.1);
 }
 
 .tooltip-container {
@@ -406,6 +406,104 @@
 .tooltip-container:hover .tooltip {
   visibility: visible;
   opacity   : 1;
+}
+
+.deactivate__modal--container {
+  width           : 100dvw;
+  height          : 100dvh;
+
+  position        : fixed;
+  top             : 0;
+  left            : 0;
+
+  display         : grid;
+  place-content   : center;
+  
+  background-color: rgba(0, 0, 0, 0.2);
+
+  opacity         : 0;
+  pointer-events  : none;
+  transition      : opacity 0.25s ease;
+  z-index         : 1000;
+}
+
+.deactivate__modal--container.show {
+  opacity       : 1;
+}
+
+.deactivate__modal {
+  width        : 100%;
+  max-width    : 25em;
+  padding      : 1.4em;
+
+  background   : #fefefe;
+  box-shadow   : 0 1em 2.5em rgba(0, 0, 0, 0.2);
+  border-radius: 1rem;
+
+  text-align   : center;
+}
+
+.deactivate__modal img {
+  margin-bottom: 1em;
+}
+
+.deactivate__modal p {
+  margin-bottom: 0.5em;
+
+  color        : #333;
+
+  font-size    : 1em;
+  font-weight  : 500;
+}
+
+.deactivate__modal span {
+  margin-bottom: 0.3em;
+  
+  color        : #555;
+
+  font-size    : 0.875em;
+  font-weight  : 500;
+}
+
+.deactivate__modal div {
+  margin-top     : 1.5em;
+
+  display        : flex;
+  justify-content: space-between;
+  gap            : 0.75em;
+}
+
+.deactivate__modal--cancel,
+.deactivate__modal--confirm {
+  padding      : 0.75em 1em;
+
+  flex         : 1;
+
+  border       : none;
+  border-radius: 0.5rem;
+
+  font-size    : 0.875em;
+  
+  cursor       : pointer;
+  transition   : background 0.2s ease;
+}
+
+.deactivate__modal--cancel {
+  background: #e0e0e0;
+  color     : #333;
+}
+
+.deactivate__modal--cancel:hover {
+  background: #d0d0d0;
+}
+
+.deactivate__modal--confirm {
+  background: #007aff;
+  color     : white;
+}
+
+.deactivate__modal--confirm:hover {
+  background: #006ae6;
 }
 
 /* #endregion */
