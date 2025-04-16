@@ -64,6 +64,8 @@ class ElementoModel
       return $result->fetch_all(MYSQLI_ASSOC);
     }
 
+    // Registrar error en archivo
+    error_log("[" . date("Y-m-d H:i:s") . "] Execute failed (Fetch elements): " . $stmt->error . PHP_EOL, 3, __DIR__ . "/../../logs/php_errors.log");
     return null;
   }
 
@@ -85,6 +87,8 @@ class ElementoModel
       }
     }
 
+    // Registrar error en archivo
+    error_log("[" . date("Y-m-d H:i:s") . "] Execute failed (Fetch element): " . $stmt->error . PHP_EOL, 3, __DIR__ . "/../../logs/php_errors.log");
     return null;
   }
 
@@ -99,6 +103,8 @@ class ElementoModel
 
     if ($stmt->execute()) return true;
 
+    // Registrar error en archivo
+    error_log("[" . date("Y-m-d H:i:s") . "] Execute failed (Deactivate element): " . $stmt->error . PHP_EOL, 3, __DIR__ . "/../../logs/php_errors.log");
     return null;
   }
 }
