@@ -96,11 +96,11 @@ export default function ListElements({ setAlert }) {
                 </div>
                 <div className="tooltip-container">
                   <Icon icon="system-uicons:trash" width="24" strokeWidth={1.2} onClick={() => handleAlert(codigo, nombre, tipo)} />
-                  <span className="tooltip">Eliminar</span>
+                  <span className="tooltip">Deshabilitar</span>
                 </div>
                 <div className="tooltip-container">
                   <Icon icon="system-uicons:settings" width="24" strokeWidth={1.2} />
-                  <span className="tooltip">Opciones</span>
+                  <span className="tooltip">Mantenimiento</span>
                 </div>
               </td>
             </tr>

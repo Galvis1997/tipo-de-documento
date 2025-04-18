@@ -11,6 +11,7 @@
   overflow     : hidden;
 
   font-size: 1.2em;
+  container-type: inline-size;
 }
 
 .maximized_window {
@@ -313,13 +314,13 @@
 .table {
   width    : 100%;
   max-width: 100%;
-  padding  : 0 1rem 1rem 1rem;
 
   background-color: #f9f9fb;
   border-radius   : 0.75rem;
   border-spacing  : 0;
 
   font-size: 1.1rem;
+
 }
 
 .table__header th {
@@ -408,39 +409,59 @@
   opacity   : 1;
 }
 
+@container (max-width: 912px) {
+
+  .table th:nth-child(3),
+  .table td:nth-child(3) {
+    display: none;
+  }
+}
+
+@container (max-width: 840px) {
+
+  .table th:nth-child(4),
+  .table td:nth-child(4) {
+    display: none;
+  }
+}
+
+/* #endregion */
+
+/* #region Modal */
 .deactivate__modal--container {
-  width           : 100dvw;
-  height          : 100dvh;
+  width : 100dvw;
+  height: 100dvh;
 
-  position        : fixed;
-  top             : 0;
-  left            : 0;
+  position: fixed;
+  top     : 0;
+  left    : 0;
 
-  display         : grid;
-  place-content   : center;
-  
+  display      : grid;
+  place-content: center;
+
   background-color: rgba(0, 0, 0, 0.2);
 
-  opacity         : 0;
-  pointer-events  : none;
-  transition      : opacity 0.25s ease;
-  z-index         : 1000;
+  opacity       : 0;
+  pointer-events: none;
+  transition    : opacity 0.25s ease;
+  z-index       : 1000;
 }
 
 .deactivate__modal--container.show {
   opacity       : 1;
+  pointer-events: auto;
 }
 
 .deactivate__modal {
-  width        : 100%;
-  max-width    : 25em;
-  padding      : 1.4em;
+  width    : 100%;
+  max-width: 25em;
+  padding  : 1.4em;
 
   background   : #fefefe;
   box-shadow   : 0 1em 2.5em rgba(0, 0, 0, 0.2);
   border-radius: 1rem;
 
-  text-align   : center;
+  text-align: center;
 }
 
 .deactivate__modal img {
@@ -450,23 +471,23 @@
 .deactivate__modal p {
   margin-bottom: 0.5em;
 
-  color        : #333;
+  color: #333;
 
-  font-size    : 1em;
-  font-weight  : 500;
+  font-size  : 1em;
+  font-weight: 500;
 }
 
 .deactivate__modal span {
   margin-bottom: 0.3em;
-  
-  color        : #555;
 
-  font-size    : 0.875em;
-  font-weight  : 500;
+  color: #555;
+
+  font-size  : 0.875em;
+  font-weight: 500;
 }
 
 .deactivate__modal div {
-  margin-top     : 1.5em;
+  margin-top: 1.5em;
 
   display        : flex;
   justify-content: space-between;
@@ -475,17 +496,17 @@
 
 .deactivate__modal--cancel,
 .deactivate__modal--confirm {
-  padding      : 0.75em 1em;
+  padding: 0.75em 1em;
 
-  flex         : 1;
+  flex: 1;
 
   border       : none;
   border-radius: 0.5rem;
 
-  font-size    : 0.875em;
-  
-  cursor       : pointer;
-  transition   : background 0.2s ease;
+  font-size: 0.875em;
+
+  cursor    : pointer;
+  transition: background 0.2s ease;
 }
 
 .deactivate__modal--cancel {
