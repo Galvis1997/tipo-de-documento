@@ -10,7 +10,7 @@
   box-shadow   : 0 -10px 20px 0 #0000001a, 0 8px 20px 0 #0000001a;
   overflow     : hidden;
 
-  font-size: 1.2em;
+  font-size     : 1.2em;
   container-type: inline-size;
 }
 
@@ -92,7 +92,6 @@
   padding: .5em calc((67.14px - 28px) / 2);
 
   display        : flex;
-  justify-content: space-between;
 
   border-radius: 10px;
 
@@ -142,21 +141,22 @@
 
 /* ejemplo base para todos */
 .resizer {
-  position: absolute;
+  position  : absolute;
   background: transparent;
-  z-index: 40;
+  z-index   : 40;
 }
 
 /* bordes */
 .resizer--top,
 .resizer--bottom {
   height: 5px;
-  width: 100%;
+  width : 100%;
   cursor: ns-resize;
 }
+
 .resizer--left,
 .resizer--right {
-  width: 5px;
+  width : 5px;
   height: 100%;
   cursor: ew-resize;
 }
@@ -164,13 +164,14 @@
 /* esquinas */
 .resizer--top-left,
 .resizer--bottom-right {
-  width: 10px;
+  width : 10px;
   height: 10px;
   cursor: nwse-resize;
 }
+
 .resizer--top-right,
 .resizer--bottom-left {
-  width: 10px;
+  width : 10px;
   height: 10px;
   cursor: nesw-resize;
 }
@@ -530,6 +531,74 @@
 
 .deactivate__modal--confirm:hover {
   background: #006ae6;
+}
+
+/* #endregion */
+
+/* #region SeeElement Info */
+
+.see-title {
+  display        : flex;
+  justify-content: space-between;
+  align-items    : center;
+}
+
+.search-input {
+  display    : flex;
+  align-items: center;
+  gap        : .8em;
+}
+
+.search-input span {
+  font-size  : .8em;
+  font-weight: 400;
+}
+
+.search-input input {
+  padding         : 8px 12px;
+  font-size       : 16px;
+  border-radius   : 8px;
+  border          : 1px solid #d1d1d6;
+  background-color: #f9f9f9;
+  outline         : none;
+  transition      : border 0.2s ease-in-out;
+}
+
+.input:focus {
+  border-color    : #007aff;
+  background-color: #fff;
+}
+
+.element-info__container {
+  display              : grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap                  : 12px;
+  padding              : 20px;
+  background-color     : #ffffffcc;
+}
+
+.element-info {
+  display         : flex;
+  justify-content : space-between;
+  align-items     : center;
+  padding         : 10px 14px;
+  background-color: #f5f5f7;
+  border-radius   : 10px;
+}
+
+.element-info__title {
+  font-weight: 600;
+  color      : #3c3c43;
+  font-size  : 15px;
+  flex       : 1;
+}
+
+.element-info__content {
+  text-align : right;
+  flex       : 2;
+  font-size  : 15px;
+  color      : #1d1d1f;
+  font-weight: 400;
 }
 
 /* #endregion */

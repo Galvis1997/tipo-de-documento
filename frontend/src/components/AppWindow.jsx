@@ -40,6 +40,7 @@ export default function AppWindow({
 
   // #region Window Content
   const [activeView, setActiveView] = useState()
+  const [searchedElement, setSearchedElement] = useState(null)
   const content = windowContents[id]
   const sidebarLabelRefs = useRef([])
 
@@ -47,7 +48,6 @@ export default function AppWindow({
     if (content?.sidebar?.length > 0) {
       setActiveView(content.sidebar[0].key)
     }
-
   }, [id])
 
   const setSidebarRef = (el, index) => {
@@ -86,7 +86,7 @@ export default function AppWindow({
               icon={item.icon}
               width='28px'
               strokeWidth={1.2}
-              className='window__menu--item--icon'/>
+              className='window__menu--item--icon' />
             <span ref={el => setSidebarRef(el, index)}>
               {item.label}
             </span>
@@ -99,8 +99,23 @@ export default function AppWindow({
   const renderMainContent = useCallback(() => {
     if (!content?.views) return null
     const ViewComponent = content.views?.[activeView]
-    return ViewComponent ? <ViewComponent setAlert={setAlert} /> : null
-  }, [content?.views, activeView, setAlert])
+
+    if (!ViewComponent) return null
+
+    const props = { setAlert }
+
+    switch (activeView) {
+      case 'listElement':
+        props.setActiveView = setActiveView
+        props.setSearchedElement = setSearchedElement
+        break
+      case 'seeElement':
+        props.searchElement = searchedElement
+    }
+
+    return <ViewComponent {...props} />
+  }, [content?.views, activeView, setAlert, searchedElement])
+
   // #endregion
 
   return (

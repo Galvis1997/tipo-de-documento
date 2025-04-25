@@ -4,7 +4,7 @@ import danger from '../../assets/icons/danger.svg'
 
 import { Icon } from '@iconify/react'
 
-export default function ListElements({ setAlert }) {
+export default function ListElements({ setAlert, setActiveView, setSearchedElement }) {
 
   const [elements, setElements] = useState([])
   const [deactivateElement, setDeactivateElement] = useState({ code: null, name: null, type: null })
@@ -64,7 +64,7 @@ export default function ListElements({ setAlert }) {
 
   return (
     <>
-      <div className="title">Listar Elementos</div>
+      <span className="title">Listar Elementos</span>
 
       <table className="table">
         <thead className="table__header">
@@ -87,7 +87,14 @@ export default function ListElements({ setAlert }) {
               <td>{estado}</td>
               <td className="table__body--actions">
                 <div className="tooltip-container">
-                  <Icon icon="system-uicons:eye" width="24" strokeWidth={1.2} />
+                  <Icon
+                    icon="system-uicons:eye"
+                    width="24" strokeWidth={1.2}
+                    onClick={() => {
+                      setActiveView('seeElement')
+                      setSearchedElement(codigo)
+                      setElements([]) // Limpiar la lista de elementos para evitar conflictos
+                    }} />
                   <span className="tooltip">Ver</span>
                 </div>
                 <div className="tooltip-container">
@@ -108,6 +115,7 @@ export default function ListElements({ setAlert }) {
         </tbody>
       </table>
 
+      {/* Modal deshabilitar elemento */}
       <div className={`deactivate__modal--container ${showModal ? 'show' : ''}`}>
         <div className="deactivate__modal">
           {danger && <img src={danger} alt="" width='64px' />}

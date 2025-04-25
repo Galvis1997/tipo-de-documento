@@ -20,7 +20,13 @@ $connection = new Database();
 if ($connection) {
   $controller = new ElementoController($connection->connect());
 
-  $result = $controller->getAllElementos();
+  if (isset($_GET["codigo"])) {
+    $codigo = (int) $_GET["codigo"];
+
+    $result = $controller->getElementoByCodigo($codigo);
+  } else {
+    $result = $controller->getAllElementos();
+  }
 
   if ($result) $output = $result;
 }

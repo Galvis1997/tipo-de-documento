@@ -69,26 +69,74 @@ class ElementoModel
     return null;
   }
 
-  public function getElementoByCodigo($codigo, $tabla_tipo)
+  public function getElementoByCodigo($codigo)
   {
-    $column = ($tabla_tipo == "{$this->table_cons}") ? "ele_con_codigo" : "ele_dev_codigo";
+    $query_devo = "SELECT 
+                  ele_dev_codigo AS codigo, 
+                  ele_dev_nombre AS nombre, 
+                  ele_dev_placa AS placa, 
+                  ele_dev_serial AS serial, 
+                  d.area_id AS area_id, 
+                  a.area_nombre AS area, 
+                  d.marca_id AS marca_id,
+                  m.marca_nombre as marca, 
+                  ele_dev_modelo AS modelo, 
+                  'devolutivo' AS tipo, 
+                  ele_dev_estado AS estado
+                  FROM {$this->table_devo} d
+                  JOIN areas a ON d.area_id = a.area_id
+                  JOIN marcas m ON d.marca_id = m.marca_id
+                  WHERE ele_dev_codigo = ?";
+    $stmt = $this->conn->prepare($query_devo);
+    if (!$stmt) {
+      error_log("Error preparando query de devolutivo: " . $stmt->error . PHP_EOL, 3, __DIR__ . "/../../logs/php_errors.log");
+      return null;
+    }
 
-    $query = "SELECT *
-              FROM {$tabla_tipo}
-              WHERE {$column} = ?";
-    $stmt = $this->conn->prepare($query);
     $stmt->bind_param('i', $codigo);
 
     if ($stmt->execute()) {
-      $result = $stmt->get_result();
-      if ($result->num_rows > 0) {
-        $row = $result->fetch_assoc();
-        return $row;
+      $result_devo = $stmt->get_result();
+
+      if ($result_devo->num_rows > 0) {
+        return $result_devo->fetch_assoc();
       }
+    } else {
+      error_log("[" . date("Y-m-d H:i:s") . "] Execute failed (Fetch element devolutivo): " . $stmt->error . PHP_EOL, 3, __DIR__ . "/../../logs/php_errors.log");
+      return null;
     }
 
-    // Registrar error en archivo
-    error_log("[" . date("Y-m-d H:i:s") . "] Execute failed (Fetch element): " . $stmt->error . PHP_EOL, 3, __DIR__ . "/../../logs/php_errors.log");
+    $query_cons = "SELECT 
+                  ele_con_codigo AS codigo, 
+                  ele_con_nombre AS nombre, 
+                  ele_con_cantidad AS cantidad, 
+                  c.area_id AS area_id, 
+                  a.area_nombre AS area, 
+                  ele_con_medida AS medida, 
+                  'consumible' AS tipo, 
+                  ele_con_estado AS estado
+                  FROM {$this->table_cons} c
+                  JOIN areas a ON c.area_id = a.area_id
+                  WHERE ele_con_codigo = ?";
+    $stmt = $this->conn->prepare($query_cons);
+    if (!$stmt) {
+      error_log("Error preparando query de consumible: " . $stmt->error . PHP_EOL, 3, __DIR__ . "/../../logs/php_errors.log");
+      return null;
+    }
+
+    $stmt->bind_param('i', $codigo);
+
+    if ($stmt->execute()) {
+      $result_cons = $stmt->get_result();
+
+      if ($result_cons->num_rows > 0) {
+        return $result_cons->fetch_assoc();
+      }
+    } else {
+      error_log("[" . date("Y-m-d H:i:s") . "] Execute failed (Fetch element consumible): " . $stmt->error . PHP_EOL, 3, __DIR__ . "/../../logs/php_errors.log");
+      return null;
+    }
+
     return null;
   }
 

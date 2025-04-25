@@ -14,7 +14,7 @@ class ElementoController
   {
     if (empty($codigo) || empty($nombre) || empty($area) || empty($placa) || empty($serial) || empty($marca) || empty($modelo)) return ["error" => "campos vacios"];
 
-    $validate_elemento = $this->getElementoByCodigo($codigo, $this->elemento_model->table_devo);
+    $validate_elemento = $this->getElementoByCodigo($codigo);
     if (empty($validate_elemento["error"])) return ["error" => "elemento ya existe"];
 
     $result = $this->elemento_model->saveElementoDevolutivo($codigo, $nombre, $area, $placa, $serial, $marca, $modelo);
@@ -27,7 +27,7 @@ class ElementoController
   {
     if (empty($codigo) || empty($nombre) || empty($area) || empty($cantidad) || empty($medida)) return ["error" => "campos vacios"];
 
-    $validate_elemento = $this->getElementoByCodigo($codigo, $this->elemento_model->table_cons);
+    $validate_elemento = $this->getElementoByCodigo($codigo);
     if (empty($validate_elemento["error"])) return ["error" => "elemento ya existe"];
 
     if ($medida === "m") $medida = "metros";
@@ -50,9 +50,11 @@ class ElementoController
     return ["error" => "error al obtener elementos"];
   }
 
-  public function getElementoByCodigo($codigo, $tabla_tipo)
+  public function getElementoByCodigo($codigo)
   {
-    $get_elemento = $this->elemento_model->getElementoByCodigo($codigo, $tabla_tipo);
+    if (empty($codigo)) return ["error" => "campos vacios"];
+
+    $get_elemento = $this->elemento_model->getElementoByCodigo($codigo);
 
     if ($get_elemento) return $get_elemento;
 
@@ -63,7 +65,7 @@ class ElementoController
   {
     $tabla_tipo = strtolower($tipo) === 'consumible' ? $this->elemento_model->table_cons : $this->elemento_model->table_devo;
 
-    $get_elemento = $this->elemento_model->getElementoByCodigo($codigo, $tabla_tipo);
+    $get_elemento = $this->elemento_model->getElementoByCodigo($codigo);
 
     if (!$get_elemento) return ["error" => "elemento no existe"];
 
