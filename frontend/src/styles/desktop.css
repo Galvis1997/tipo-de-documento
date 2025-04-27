@@ -164,3 +164,17 @@
 .alert.success {
   border-color: #4ee800;
 }
+
+/* Context Menu */
+
+.contextMenu{
+  display: none;
+  position: absolute;
+  background-color: #0000009d;
+  color: #fff;
+  width: 100px;
+  height: auto;
+  padding: 10px;
+  border-radius: 6px;
+  z-index: 10000000;
+}

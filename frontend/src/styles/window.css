@@ -91,7 +91,7 @@
   height : 50px;
   padding: .5em calc((67.14px - 28px) / 2);
 
-  display        : flex;
+  display: flex;
 
   border-radius: 10px;
 
@@ -133,7 +133,6 @@
   flex-flow: column nowrap;
   gap      : 1em;
 
-  overflow-y: scroll;
   overflow-x: hidden;
 
   scroll-behavior: smooth;
@@ -387,7 +386,9 @@
 
 .tooltip-container {
   position: relative;
-  display : inline-block;
+
+  display    : inline-flex;
+  align-items: center;
 }
 
 .tooltip-container .tooltip {

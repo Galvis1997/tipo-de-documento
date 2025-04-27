@@ -53,7 +53,7 @@ export default function SeeElements({ setAlert, searchElement }) {
           <span>Código</span>
           <input
             type="text"
-            value={searchCode}
+            value={searchCode || ''}
             placeholder="Código"
             onChange={(e) => {
               const value = e.target.value;
