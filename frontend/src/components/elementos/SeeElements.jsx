@@ -5,14 +5,12 @@ export default function SeeElements({ setAlert, searchElement }) {
   const [element, setElement] = useState(null);
   const [loading, setLoading] = useState(false);
   const [searchCode, setSearchCode] = useState(searchElement);
-  const [typing, setTyping] = useState(false); // nuevo estado
+  const [typing, setTyping] = useState(false);
 
   const fetchElement = async (code) => {
     try {
       const res = await fetch(`${FetchElementByCodeEndpoint}${code}`)
       const response = await res.json()
-
-      console.log(response)
 
       if (response.error) {
         setAlert({ type: "error", message: response.error })
@@ -23,11 +21,12 @@ export default function SeeElements({ setAlert, searchElement }) {
     } catch (error) {
       setAlert({ type: "error", message: "Error al buscar el elemento", active: true })
       setElement(null)
+      setTyping(false);
     }
   };
 
   useEffect(() => {
-    if (!searchCode || searchCode.trim() === "") {
+    if (!searchCode) {
       setElement(null);
       setLoading(false);
       setTyping(false);
